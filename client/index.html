@@ -22,7 +22,7 @@
       </div>
       <div id="main">
         <h1>chatterbox</h1><span id="changeID">Change User</span>
-        <div class="input"><input type="text" id="input" size=70><span class="send">Send!</span></div>
+        <div class="input"><input type="text" id="input" size=70 onkeydown="if (event.keyCode == 13) {app.addMessage(); $('#input').val('')}"><span class="send">Send!</span></div>
         <div id="chatterbox">
         </div>
       </div>

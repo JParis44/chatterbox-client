@@ -7,6 +7,8 @@ $(document).ready(function(){
 
   app.selectedRoom = 'All Rooms';
 
+  app.friends = {};
+
   app.init = function() {
     // What should I be doing you guys?
 
@@ -78,6 +80,7 @@ $(document).ready(function(){
       var $text = $('<div></div>').text(message.text === undefined ? '--------' : message.text);
       var $user = $('<div class="username"></div>').text(message.username === undefined ? 'WHO ARE YOU?' : message.username);
       $message.append($text).append($user);
+      if (app.friends[message.username]) $message.addClass('friend');
       $('#chatterbox').append($message);
     });
     //This updates Rooms
@@ -110,6 +113,14 @@ $(document).ready(function(){
     app.selectedRoom = $(e.target).data('room');
     app.setRoom();
   });
+
+  $('#chatterbox').on('click', '.username', function(e) {
+    if (app.friends[$(e.target).text()] !== true) {
+      app.friends[$(e.target).text()] = true;
+      var $friend = $('<div></div>').text($(e.target).text());
+      $('#friendList').append($friend);
+    }
+  })
 
   app.fetch();
   setInterval(app.fetch, 5000);

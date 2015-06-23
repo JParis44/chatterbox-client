@@ -24,11 +24,12 @@ body {
 }
 
 .container {
-    width: 750px;
+    width: 800px;
     margin: auto;
 }
 
 .sidebar {
+    width: 150px;
   float: left;
   margin-top: 90px;
   padding: 10px;
@@ -74,13 +75,22 @@ body {
 
 .message {
     padding: 5px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #B1B1B1;
 }
 
 .username {
     font-size: .8em;
     font-weight: bolder;
     padding-left: 10px;
+    cursor: pointer;
+}
+
+.room {
+    cursor: pointer;
+}
+
+.friend {
+    background: #eeeeff;
 }
 
 form {
