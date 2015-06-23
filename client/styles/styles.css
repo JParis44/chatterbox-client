@@ -23,13 +23,14 @@ body {
     padding: 5px;
 }
 
-.changeID {
+#changeID {
     position: absolute;
     top: 0px;
     right: 0px;
     border: 1px solid black;
     margin: 2px;
     padding: 2px;
+    cursor: pointer;
 }
 
 #main h1 span {
@@ -73,6 +74,7 @@ form input[type=text] {
     border: 1px solid black;
     padding: 1px;
     margin-left: 5px;
+    cursor: pointer;
 }
 
 .chat {

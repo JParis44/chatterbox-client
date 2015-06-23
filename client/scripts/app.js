@@ -17,6 +17,7 @@ $(document).ready(function(){
       contentType: 'application/json',
       success: function (data) {
         console.log('chatterbox: Message sent');
+        app.fetch();
       },
       error: function (data) {
         // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -33,6 +34,7 @@ $(document).ready(function(){
       success: function (data) {
         console.log('chatterbox: Message fetched');
         app.messages = data.results;
+        app.update();
       },
       error: function (data) {
         // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -71,12 +73,16 @@ $(document).ready(function(){
       $('#chatterbox').append($message);
 
     });
-    app.fetch();
   };
 
   $('.send').on('click', function(e) {
     app.addMessage();
   })
 
-  setInterval(app.update, 10000);
+  $('#changeID').on('click', function(){
+    window.location.search = '';
+  });
+
+  app.fetch();
+  setInterval(app.fetch, 5000);
 });
