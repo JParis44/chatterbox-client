@@ -72,6 +72,17 @@ body {
     line-height: 13px;
 }
 
+.message {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.username {
+    font-size: .8em;
+    font-weight: bolder;
+    padding-left: 10px;
+}
+
 form {
     padding: 20px;
     padding-left: 0;

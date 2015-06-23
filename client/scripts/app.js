@@ -54,15 +54,18 @@ $(document).ready(function(){
   app.addMessage = function() {
     var username = window.location.search.substring(window.location.search.indexOf('=')+1);
     var message = {
-      username: username,
+      username: username.replace('%20', ' '),
       text: $('#input').val(),
-      roomname: 'main'
+      roomname: app.selectedRoom
     };
     app.send(message);
   };
 
-  app.addRoom = function() {
+  app.addRoom = function(room) {
     //Set up a new room.
+    app.selectedRoom = room;
+    app.rooms[room] = true;
+    app.update();
   };
 
   app.update = function () {
@@ -73,8 +76,8 @@ $(document).ready(function(){
       var $message = $('<div class="message"></div>');
       $message.addClass(message.roomname);
       var $text = $('<div></div>').text(message.text === undefined ? '--------' : message.text);
-      var $user = $('<div></div>').text(message.username === undefined ? 'WHO ARE YOU?' : message.username);
-      $message.append($user).append($text);
+      var $user = $('<div class="username"></div>').text(message.username === undefined ? 'WHO ARE YOU?' : message.username);
+      $message.append($text).append($user);
       $('#chatterbox').append($message);
     });
     //This updates Rooms
@@ -91,7 +94,7 @@ $(document).ready(function(){
       $('.message').show();
     } else {
       $('.message').hide();
-      $('.'+app.selectedRoom).show();
+      $('.'+app.selectedRoom.replace(' ', '')).show();
     }
   }
 
