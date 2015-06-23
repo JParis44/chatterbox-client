@@ -3,7 +3,9 @@ $(document).ready(function(){
 
   app.messages = [];
 
-  app.rooms = {};
+  app.rooms = {'All Rooms': true};
+
+  app.selectedRoom = 'All Rooms';
 
   app.init = function() {
     // What should I be doing you guys?
@@ -43,8 +45,6 @@ $(document).ready(function(){
         console.error('chatterbox: Failed to fetch message');
       }
     });
-
-    //Add filter for current room
   };
 
   app.clearMessages = function() {
@@ -66,22 +66,34 @@ $(document).ready(function(){
   };
 
   app.update = function () {
+    // This updates Messages
     app.clearMessages();
     $.each(app.messages, function(i, message){
-      app.rooms[message.roomname] = true;
+      app.rooms[message.roomname || 'Main'] = true;
       var $message = $('<div class="message"></div>');
-      $message.addClass(message.roomname || 'main');
+      $message.addClass(message.roomname);
       var $text = $('<div></div>').text(message.text === undefined ? '--------' : message.text);
       var $user = $('<div></div>').text(message.username === undefined ? 'WHO ARE YOU?' : message.username);
       $message.append($user).append($text);
       $('#chatterbox').append($message);
     });
+    //This updates Rooms
     $('#roomList').empty();
     $.each(Object.keys(app.rooms), function(i, key){
-      var $room = $('<div></div>').text(key);
+      var $room = $("<div></div>").text(key).addClass('room').data('room', key);
       $('#roomList').append($room);
     });
+    app.setRoom();
   };
+
+  app.setRoom = function(){
+    if (app.selectedRoom === 'All Rooms') {
+      $('.message').show();
+    } else {
+      $('.message').hide();
+      $('.'+app.selectedRoom).show();
+    }
+  }
 
   $('.send').on('click', function(e) {
     app.addMessage();
@@ -89,6 +101,11 @@ $(document).ready(function(){
 
   $('#changeID').on('click', function(){
     window.location.search = '';
+  });
+
+  $('#roomList').on('click', '.room' ,function(e){
+    app.selectedRoom = $(e.target).data('room');
+    app.setRoom();
   });
 
   app.fetch();
