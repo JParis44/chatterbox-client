@@ -1,7 +1,9 @@
 $(document).ready(function(){
-  var app = {};
+  window.app = {};
 
   app.messages = [];
+
+  app.rooms = {};
 
   app.init = function() {
     // What should I be doing you guys?
@@ -64,6 +66,7 @@ $(document).ready(function(){
   };
 
   app.update = function () {
+//---------------------------------Loop through to build room list
     app.clearMessages();
     $.each(app.messages, function(i, message){
       var $message = $('<div class="message"></div>')
@@ -74,6 +77,8 @@ $(document).ready(function(){
 
     });
   };
+
+  app.rooms = {};
 
   $('.send').on('click', function(e) {
     app.addMessage();
