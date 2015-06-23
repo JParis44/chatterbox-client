@@ -66,19 +66,22 @@ $(document).ready(function(){
   };
 
   app.update = function () {
-//---------------------------------Loop through to build room list
     app.clearMessages();
     $.each(app.messages, function(i, message){
-      var $message = $('<div class="message"></div>')
+      app.rooms[message.roomname] = true;
+      var $message = $('<div class="message"></div>');
+      $message.addClass(message.roomname || 'main');
       var $text = $('<div></div>').text(message.text === undefined ? '--------' : message.text);
       var $user = $('<div></div>').text(message.username === undefined ? 'WHO ARE YOU?' : message.username);
       $message.append($user).append($text);
       $('#chatterbox').append($message);
-
+    });
+    $('#roomList').empty();
+    $.each(Object.keys(app.rooms), function(i, key){
+      var $room = $('<div></div>').text(key);
+      $('#roomList').append($room);
     });
   };
-
-  app.rooms = {};
 
   $('.send').on('click', function(e) {
     app.addMessage();

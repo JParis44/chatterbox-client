@@ -7,8 +7,8 @@ body {
 
 #main {
     position: relative;
+    float: right;
     width: 500px;
-    margin: auto;
     text-align: left;
     background: white;
     padding: 50px 60px;
@@ -21,6 +21,21 @@ body {
     font-size: 35px;
     margin-bottom: 5px;
     padding: 5px;
+}
+
+.container {
+    width: 750px;
+    margin: auto;
+}
+
+.sidebar {
+  float: left;
+  margin-top: 90px;
+  padding: 10px;
+  background: white;
+  border: solid #ddd;
+  border-width: 0 1px 1px 1px;
+
 }
 
 #changeID {

@@ -13,10 +13,18 @@
     <script src="scripts/app.js"></script>
   </head>
   <body>
-    <div id="main">
-      <h1>chatterbox</h1><span id="changeID">Change User</span>
-      <div class="input"><input type="text" id="input" size=70><span class="send">Send!</span></div>
-      <div id="chatterbox">
+    <div class='container'>
+      <div class='sidebar'>
+        <h3>Room List</h3>
+        <div id='roomList'></div>
+        <h3>Friend List</h3>
+        <div id='friendList'></div>
+      </div>
+      <div id="main">
+        <h1>chatterbox</h1><span id="changeID">Change User</span>
+        <div class="input"><input type="text" id="input" size=70><span class="send">Send!</span></div>
+        <div id="chatterbox">
+        </div>
       </div>
     </div>
   </body>
