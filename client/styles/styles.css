@@ -78,10 +78,19 @@ body {
     border-bottom: 1px solid #B1B1B1;
 }
 
+.text {
+    word-wrap: break-word;
+}
+
 .username {
     font-size: .8em;
     font-weight: bolder;
     padding-left: 10px;
+    cursor: pointer;
+}
+
+#addRoom {
+    border:1px solid black;
     cursor: pointer;
 }
 

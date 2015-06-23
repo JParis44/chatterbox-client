@@ -11,7 +11,8 @@ $(document).ready(function(){
 
   app.init = function() {
     // What should I be doing you guys?
-
+    app.fetch();
+    setInterval(app.fetch, 2000);
   };
 
   app.send = function(message) {
@@ -74,10 +75,12 @@ $(document).ready(function(){
     // This updates Messages
     app.clearMessages();
     $.each(app.messages, function(i, message){
-      app.rooms[message.roomname || 'Main'] = true;
+      var fixedRoomName = message.roomname || 'Main';
+      fixedRoomName = fixedRoomName.replace(' ', '');
+      app.rooms[fixedRoomName] = true;
       var $message = $('<div class="message"></div>');
-      $message.addClass(message.roomname);
-      var $text = $('<div></div>').text(message.text === undefined ? '--------' : message.text);
+      $message.addClass(fixedRoomName);
+      var $text = $('<div></div>').text(message.text === undefined ? '--------' : message.text).addClass('text');
       var $user = $('<div class="username"></div>').text(message.username === undefined ? 'WHO ARE YOU?' : message.username);
       $message.append($text).append($user);
       if (app.friends[message.username]) $message.addClass('friend');
@@ -99,11 +102,11 @@ $(document).ready(function(){
       $('.message').hide();
       $('.'+app.selectedRoom.replace(' ', '')).show();
     }
-  }
+  };
 
   $('.send').on('click', function(e) {
     app.addMessage();
-  })
+  });
 
   $('#changeID').on('click', function(){
     window.location.search = '';
@@ -120,8 +123,12 @@ $(document).ready(function(){
       var $friend = $('<div></div>').text($(e.target).text());
       $('#friendList').append($friend);
     }
-  })
+  });
 
-  app.fetch();
-  setInterval(app.fetch, 5000);
+  $('#addRoom').on('click', function(){
+    var room = prompt('Room Name:');
+    app.addRoom(room);
+  });
+
+  app.init();
 });
