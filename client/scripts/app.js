@@ -62,6 +62,7 @@ $(document).ready(function(){
       roomname: app.selectedRoom
     };
     app.send(message);
+    $('#input').val('');
   };
 
   app.addRoom = function(room) {
